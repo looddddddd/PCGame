@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 /// <summary>
-/// 道具对象数据中心
+/// 道具对象数据
 /// </summary>
 public  class ItemsModel : BaseModel
 {

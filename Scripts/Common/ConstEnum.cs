@@ -49,3 +49,30 @@ public enum FreshType
     /// </summary>
     Dur,
 }
+public enum DoorType
+{ 
+    /// <summary>
+    /// 向上
+    /// </summary>
+    Up,
+    /// <summary>
+    /// 向下
+    /// </summary>
+    Down,
+    /// <summary>
+    /// 向左
+    /// </summary>
+    Left,
+    /// <summary>
+    /// 向右
+    /// </summary>
+    Right,
+    /// <summary>
+    /// 系统定义终点
+    /// </summary>
+    SysEnd,
+    /// <summary>
+    /// 用户定义终点
+    /// </summary>
+    UserEnd,
+}

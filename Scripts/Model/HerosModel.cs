@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+/// <summary>
+/// 英雄对象数据
+/// </summary>
 
 public class HerosModel : Singleton<HerosModel> {
     /// <summary>
-    /// 玩家所有的道具
+    /// 当前地块存在的地方英雄
     /// </summary>
     static Dictionary<int, HeroJson> heroMap = new Dictionary<int, HeroJson>();
     /// <summary>

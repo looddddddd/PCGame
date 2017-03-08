@@ -6,6 +6,9 @@ using System.Collections;
 public class ItemsMgr : Singleton<ItemsMgr>
 {
     static ItemJson _currentItem;
+    /// <summary>
+    /// 当前持有的道具
+    /// </summary>
     public static ItemJson currentItem
     {
         get { return _currentItem; }
