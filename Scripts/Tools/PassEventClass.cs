@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// 事件穿透
 /// </summary>
-public class PassEvent : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+public class PassEventClass : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     /// <summary>
     /// 监听按下
