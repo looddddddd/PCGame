@@ -12,7 +12,7 @@ public class TileJson
         set 
         {
             _id = value;
-            coordinate = new Vector2((float)_id, (float)_id);
+            coordinate = TileModel.GetCoordinateById(_id);
             doors = new int[] { _id };
         }
     }

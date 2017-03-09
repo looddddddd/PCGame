@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// 主视图
 /// </summary>
@@ -58,13 +59,31 @@ public class MainView : BaseView
     #endregion
 
     #region 预设引用
+    /// <summary>
+    /// 英雄预设
+    /// </summary>
     public GameObject heroPrefab;
+
+    #region 
+    /// <summary>
+    /// 地图名字
+    /// </summary>
+    public GameObject tileNameGo;
+    #endregion
     #endregion
     protected override void OnStart()
     {
         base.OnStart();
         Pooler.SetPooler(pooler);
+        FreshTileName();
         GreateHeros();
+    }
+    /// <summary>
+    /// 刷新地块名字
+    /// </summary>
+    void FreshTileName()
+    {
+        tileNameGo.GetComponent<Text>().text = TileMgr.currentTile.name;
     }
     /// <summary>
     /// 创建英雄卡牌

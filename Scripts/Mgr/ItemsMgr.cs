@@ -34,7 +34,7 @@ public class ItemsMgr : Singleton<ItemsMgr>
     {
         bool isUse = ItemsModel.UseItem();
         if (!isUse) return isUse;
-        currentItem.view.Fresh(FreshType.Dur);
+        if(currentItem.view) currentItem.view.Fresh(FreshType.Dur);
         return isUse;
     }
 }

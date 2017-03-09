@@ -6,7 +6,7 @@ public class Pooler : Singleton<Pooler>
     /// <summary>
     /// 对象池脚本挂载对象
     /// </summary>
-    public static GameObject pooler;
+    static GameObject pooler;
     /// <summary>
     /// 对象池存放
     /// </summary>

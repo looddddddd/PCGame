@@ -18,9 +18,10 @@ public class TileMgr : Singleton<TileMgr> {
     /// <summary>
     /// 切换地块
     /// </summary>
-    public static void SwitchTile(int id)
+    public static TileJson SwitchTile(int id)
     {
-        TileMgr.currentTile = TileModel.GetTileById(id);
+        currentTile = TileModel.GetTileById(id);
+        return currentTile;
     }
 
 }
