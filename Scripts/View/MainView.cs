@@ -1,8 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MainView : BaseView {
+/// <summary>
+/// 主视图
+/// </summary>
+public class MainView : BaseView
+{
+    #region 层级分类
+    /// <summary>
+    /// 对象池节点
+    /// </summary>
+    public GameObject pooler;
     /// <summary>
     /// 背景层
     /// </summary>
@@ -47,4 +55,30 @@ public class MainView : BaseView {
     /// 弹窗层(选择框等)
     /// </summary>
     public GameObject popLayer;
+    #endregion
+
+    #region 预设引用
+    public GameObject heroPrefab;
+    #endregion
+    protected override void OnStart()
+    {
+        base.OnStart();
+        Pooler.SetPooler(pooler);
+        GreateHeros();
+    }
+    /// <summary>
+    /// 创建英雄卡牌
+    /// </summary>
+    void GreateHeros()
+    {
+        string name = "HeroPool";
+        Dictionary<int,HeroJson> heroMap = HerosModel.GetHeroMap();
+        Pooler.CreatePool(name, heroPrefab, heroMap.Count);
+        foreach(var pair in heroMap)
+        {
+            GameObject heroGo = Pooler.GetPoolObj(name);
+            heroGo.transform.SetParent(heroLayer.transform);
+            heroGo.GetComponent<HeroView>().InitData(pair.Value.id);
+        }
+    }
 }

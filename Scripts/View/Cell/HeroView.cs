@@ -10,6 +10,9 @@ public class HeroView : BaseView
     {
         hero = HerosModel.GetHeroJsonById(id);
         hero.view = this;
+        RectTransform rtf = GetComponent<RectTransform>();
+        rtf.anchoredPosition = new Vector2(100 * hero.id, 100 * hero.id);
+        rtf.localScale = Vector3.one;
         FreshView();
     }
     void FreshView()
