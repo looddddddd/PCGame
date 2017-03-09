@@ -30,6 +30,7 @@ public class PassEventClass : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public void OnPointerClick(PointerEventData eventData)
     {
         //PassEvent(eventData, ExecuteEvents.submitHandler);
+        Debug.Log("OnPointerClick");
         PassEvent(eventData, ExecuteEvents.pointerClickHandler);
     }
     /// <summary>

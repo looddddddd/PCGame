@@ -36,7 +36,15 @@ public class MainView : BaseView {
     /// </summary>
     public GameObject numericalLayer;
     /// <summary>
-    /// 事件穿透层
+    /// 点击事件穿透层
     /// </summary>
     public GameObject passEventLayer;
+    /// <summary>
+    /// 事件层(剧情,对话等)
+    /// </summary>
+    public GameObject eventLayer;
+    /// <summary>
+    /// 弹窗层(选择框等)
+    /// </summary>
+    public GameObject popLayer;
 }
