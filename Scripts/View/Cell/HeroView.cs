@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class HeroView : BaseView
 {
-    public Text name;
+    public new Text name;
     public Text hp;
     HeroJson hero;
     public void InitData(int id)

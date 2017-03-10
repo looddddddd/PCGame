@@ -61,10 +61,10 @@ public class BaseView : MonoBehaviour
     /// </summary>
     protected virtual void AddEventListener()
     {
-        NotiCenter.AddEventListener(KCEvent.KCItemChange, delegate(object data)
-        {
+        //NotiCenter.AddEventListener(KCEvent.KCItemChange, delegate(object data)
+        //{
 
-        });    
+        //});    
     }
     protected virtual void OnAwake()
     {

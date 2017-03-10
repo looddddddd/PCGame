@@ -63,30 +63,61 @@ public class MainView : BaseView
     /// 英雄预设
     /// </summary>
     public GameObject heroPrefab;
+    /// <summary>
+    /// 传送预设
+    /// </summary>
+    public GameObject doorPrefab;
+    #endregion
 
-    #region 
+    #region 地图设置
     /// <summary>
     /// 地图名字
     /// </summary>
     public GameObject tileNameGo;
     #endregion
-    #endregion
+
+    protected override void AddEventListener()
+    {
+        base.AddEventListener();
+        NotiCenter.AddEventListener(KCEvent.KCTileChange, delegate(object data)
+        {
+            Fresh();
+        });
+    }
+
     protected override void OnStart()
     {
         base.OnStart();
         Pooler.SetPooler(pooler);
+        Fresh();
+    }
+    /// <summary>
+    /// 刷新
+    /// </summary>
+    void Fresh()
+    {
         FreshTileName();
-        GreateHeros();
+        FreshDoors();
+        FreshHeros();
     }
     /// <summary>
     /// 刷新地块名字
     /// </summary>
     void FreshTileName()
     {
-        tileNameGo.GetComponent<Text>().text = TileMgr.currentTile.name;
+        tileNameGo.GetComponent<Text>().text = TileModel.currentTile.name;
     }
     /// <summary>
-    /// 创建英雄卡牌
+    /// 刷新英雄
+    /// </summary>
+    void FreshHeros()
+    { 
+        string name = "HeroPool";
+        if (Pooler.PoolsContainsKey(name)) ReUseHeros();
+        else GreateHeros();
+    }
+    /// <summary>
+    /// 创建对象池,创建英雄卡牌
     /// </summary>
     void GreateHeros()
     {
@@ -98,6 +129,74 @@ public class MainView : BaseView
             GameObject heroGo = Pooler.GetPoolObj(name);
             heroGo.transform.SetParent(heroLayer.transform);
             heroGo.GetComponent<HeroView>().InitData(pair.Value.id);
+        }
+    }
+    /// <summary>
+    /// 重复使用英雄
+    /// </summary>
+    void ReUseHeros()
+    {
+        string name = "HeroPool";
+        //回收
+        int count = heroLayer.transform.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            GameObject childGo = heroLayer.transform.GetChild(0).gameObject;
+            Pooler.PutPoolObj(name,childGo);
+        }
+        //再利用
+        Dictionary<int, HeroJson> heroMap = HerosModel.GetHeroMap();
+        foreach (var pair in heroMap)
+        {
+            GameObject heroGo = Pooler.GetPoolObj(name);
+            heroGo.transform.SetParent(heroLayer.transform);
+            heroGo.GetComponent<HeroView>().InitData(pair.Value.id);
+        }
+    }
+    /// <summary>
+    /// 刷新传送点
+    /// </summary>
+    void FreshDoors()
+    {
+        string name = "DoorPool";
+        if (Pooler.PoolsContainsKey(name)) ReUseDoors();
+        else GreateDoor();
+    }
+    /// <summary>
+    /// 创建对象池,创建传送点
+    /// </summary>
+    void GreateDoor()
+    {
+        string name = "DoorPool";
+        Vector2[] doors = TileModel.currentTile.doors;
+        Pooler.CreatePool(name, doorPrefab, doors.Length);
+        for (int i = 0; i < doors.Length; i++) 
+        {
+            GameObject doorGo = Pooler.GetPoolObj(name);
+            doorGo.transform.SetParent(doorLayer.transform);
+            doorGo.GetComponent<DoorView>().InitData(doors[i],i);
+        }
+    }
+    /// <summary>
+    /// 重复使用传送点
+    /// </summary>
+    void ReUseDoors()
+    {
+        string name = "DoorPool";
+        //回收
+        int count = doorLayer.transform.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            GameObject childGo = doorLayer.transform.GetChild(0).gameObject;
+            Pooler.PutPoolObj(name, childGo);
+        }
+        //再利用
+        Vector2[] doors = TileModel.currentTile.doors;
+        for (int i = 0; i < doors.Length; i++)
+        {
+            GameObject doorGo = Pooler.GetPoolObj(name);
+            doorGo.transform.SetParent(doorLayer.transform);
+            doorGo.GetComponent<DoorView>().InitData(doors[i], i);
         }
     }
 }

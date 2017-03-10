@@ -13,13 +13,13 @@ public class TileJson
         {
             _id = value;
             coordinate = TileModel.GetCoordinateById(_id);
-            doors = new int[] { _id };
+            doors = DoorsModel.GetDoors(_id);
         }
     }
     public int type;
     public string name;
     public Vector2 coordinate;
-    public int[] doors;
+    public Vector2[] doors;
     public int[] heros;
     public string bgPicUrl;
 

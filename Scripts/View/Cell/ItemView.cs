@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class ItemView : BaseView 
 {
-    public Text name;
+    public new Text name;
     public Text durable;
     public Text maxDurable;
     public Text att;

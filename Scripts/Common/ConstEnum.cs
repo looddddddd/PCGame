@@ -7,6 +7,10 @@ public enum KCEvent
     /// 道具发生改变
     /// </summary>
     KCItemChange,
+    /// <summary>
+    /// 地块变化
+    /// </summary>
+    KCTileChange,
 }
 public enum HeroType 
 {

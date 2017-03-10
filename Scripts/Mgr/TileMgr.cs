@@ -5,23 +5,8 @@ using UnityEngine;
 /// 地块管理器
 /// </summary>
 public class TileMgr : Singleton<TileMgr> {
-
-    private static TileJson _currentTile;
-    /// <summary>
-    /// 当前处于的地块
-    /// </summary>
-    public static TileJson currentTile 
-    {
-        get { return _currentTile; }
-        set { _currentTile = value; }
+    public static void SwitchTile(Vector2 coordinate)
+    { 
+        
     }
-    /// <summary>
-    /// 切换地块
-    /// </summary>
-    public static TileJson SwitchTile(int id)
-    {
-        currentTile = TileModel.GetTileById(id);
-        return currentTile;
-    }
-
 }

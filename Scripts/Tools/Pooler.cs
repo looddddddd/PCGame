@@ -102,4 +102,14 @@ public class Pooler : Singleton<Pooler>
         go.transform.SetParent(pools[name].transform);
         go.SetActive(false);
     }
+    /// <summary>
+    /// 对象池是否存在
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static bool PoolsContainsKey(string name)
+    {
+
+        return pools.ContainsKey(name);
+    }
 }
