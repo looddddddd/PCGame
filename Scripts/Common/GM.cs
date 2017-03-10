@@ -18,6 +18,6 @@ public class GM : Singleton<GM> {
 
     public static void TestGit()
     {
-            //
+        //测试vsCode 推送
     }
 }
