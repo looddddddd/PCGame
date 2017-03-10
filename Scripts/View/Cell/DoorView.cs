@@ -15,7 +15,6 @@ public class DoorView : BaseView
         door = DoorsModel.GetDoorJsonById(id);
         door.id = id;
         door.view = this;
-
         SetDoorTypeAndPosition(index);
     }
     /// <summary>

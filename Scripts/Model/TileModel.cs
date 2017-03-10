@@ -14,10 +14,12 @@ public class TileModel : Singleton<TileModel> {
         get { return _currentTile; }
         set { _currentTile = value; }
     }
+
+    const float _size = 10f;
     /// <summary>
     /// 地图尺寸
     /// </summary>
-    public static Vector2 size = new Vector2(10, 4);
+    public static Vector2 size = new Vector2(_size, _size);
     /// <summary>
     /// 地块信息map
     /// </summary>
@@ -69,7 +71,7 @@ public class TileModel : Singleton<TileModel> {
     /// <returns>坐标Vector2</returns>
     public static Vector2 GetCoordinateById(int id)
     {
-        int x = (id - 1) / (int)size.y;
+        int x = (id - 1) / (int)size.x;
         int y = (id - 1) % (int)size.y;
         return new Vector2(x,y);
     }
@@ -81,8 +83,6 @@ public class TileModel : Singleton<TileModel> {
     public static int GetTileIdByCoordinate(Vector2 coordinate)
     {
         float id = coordinate.x + coordinate.y * size.y + 1;
-        Debug.Log(coordinate);
-        Debug.Log(id);
         return (int)id;
     }
 }
