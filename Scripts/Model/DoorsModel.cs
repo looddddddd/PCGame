@@ -13,7 +13,7 @@ public class DoorsModel : Singleton<DoorsModel>
     {
         Vector2 size = TileModel.size;
         Vector2 coordinate = TileModel.GetCoordinateById(id);
-        //上
+        //上 
         Vector2 coordinateUp = new Vector2(coordinate.x, coordinate.y + 1);
         coordinateUp.y = coordinateUp.y > size.y - 1 ? coordinateUp.y - size.y : coordinateUp.y;
         //下

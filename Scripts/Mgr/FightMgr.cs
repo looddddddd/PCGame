@@ -10,9 +10,10 @@ public class FightMgr : Singleton<FightMgr> {
     /// <param name="json">数据类</param>
     public static void VSOne(HeroJson hero)
     {
-        bool isUse = ItemsMgr.UseItem();
-        if (!isUse) return;
-        int userAtt = ItemsMgr.currentItem.att;
+        //bool isUse = ItemsMgr.UseItem();
+        //if (!isUse) return;
+        //int userAtt = ItemsMgr.currentItem.att;
+        int userAtt = 4;
         hero.hp -= userAtt;
         if (hero.hp > 0) 
         {

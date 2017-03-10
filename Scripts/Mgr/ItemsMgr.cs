@@ -16,7 +16,6 @@ public class ItemsMgr : Singleton<ItemsMgr>
         {
             if (_currentItem == value) return;
             _currentItem = value;
-            //NotiCenter.DispatchEvent(KCEvent.KCItemChange, null);
         }
     }
     /// <summary>

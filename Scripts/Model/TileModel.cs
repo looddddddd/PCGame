@@ -17,7 +17,7 @@ public class TileModel : Singleton<TileModel> {
     /// <summary>
     /// 地图尺寸
     /// </summary>
-    public static Vector2 size = new Vector2(5, 5);
+    public static Vector2 size = new Vector2(10, 4);
     /// <summary>
     /// 地块信息map
     /// </summary>
@@ -34,7 +34,7 @@ public class TileModel : Singleton<TileModel> {
             for (int x = 0; x < _x; x++)
             {
                 TileJson tile = new TileJson();
-                int id = x + y * (int)size.x +1;
+                int id = x + y * (int)size.x + 1;
                 tile.id = id;
                 tile.type = 1;
                 tile.name = string.Format("[{0},{1}]", tile.coordinate[0], tile.coordinate[1]);
@@ -80,7 +80,9 @@ public class TileModel : Singleton<TileModel> {
     /// <returns></returns>
     public static int GetTileIdByCoordinate(Vector2 coordinate)
     {
-        float id = coordinate.x + coordinate.y * size.x + 1;
+        float id = coordinate.x + coordinate.y * size.y + 1;
+        Debug.Log(coordinate);
+        Debug.Log(id);
         return (int)id;
     }
 }

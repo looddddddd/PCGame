@@ -109,7 +109,6 @@ public class Pooler : Singleton<Pooler>
     /// <returns></returns>
     public static bool PoolsContainsKey(string name)
     {
-
         return pools.ContainsKey(name);
     }
 }
