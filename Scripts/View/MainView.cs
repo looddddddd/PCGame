@@ -128,7 +128,7 @@ public class MainView : BaseView
         {
             GameObject heroGo = Pooler.GetPoolObj(name);
             heroGo.transform.SetParent(heroLayer.transform);
-            heroGo.GetComponent<HeroView>().InitData(pair.Value.id);
+            heroGo.GetComponent<HeroView>().InitData(pair.Value.heroId);
         }
     }
     /// <summary>
@@ -150,7 +150,7 @@ public class MainView : BaseView
         {
             GameObject heroGo = Pooler.GetPoolObj(name);
             heroGo.transform.SetParent(heroLayer.transform);
-            heroGo.GetComponent<HeroView>().InitData(pair.Value.id);
+            heroGo.GetComponent<HeroView>().InitData(pair.Value.heroId);
         }
     }
     /// <summary>

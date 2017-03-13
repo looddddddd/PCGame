@@ -8,11 +8,15 @@ public class TileJson
     private int _id;
     public int id 
     {
-        get { return _id; }
+        get 
+        { 
+            return _id;
+        }
         set 
         {
             _id = value;
             coordinate = TileModel.GetCoordinateById(_id);
+            name = string.Format("[{0},{1}]", coordinate[0], coordinate[1]);
             doors = DoorsModel.GetDoors(_id);
         }
     }

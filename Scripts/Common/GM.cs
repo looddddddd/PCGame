@@ -7,9 +7,9 @@ public class GM : Singleton<GM> {
     public static void Init()
     {
         Debug.Log("GM,Init");
-        TileModel.InitTileModel();
+        TileModel.Init();
         ItemsModel.InitItemsModel();
-        HerosModel.InitHerosModel();
+        // HerosModel.InitHerosModel();
     }
     public static void StartGame()
     {

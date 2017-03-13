@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LitJson;
 /// <summary>
 /// 地块对象数据
 /// </summary>
-public class TileModel : Singleton<TileModel> {
+public class TileModel : BaseModel {
     private static TileJson _currentTile;
     /// <summary>
     /// 当前的地块
@@ -15,7 +16,7 @@ public class TileModel : Singleton<TileModel> {
         set { _currentTile = value; }
     }
 
-    const float _size = 10f;
+    const float _size = 3f;
     /// <summary>
     /// 地图尺寸
     /// </summary>
@@ -25,27 +26,13 @@ public class TileModel : Singleton<TileModel> {
     /// </summary>
     static Dictionary<int, TileJson> tileMap = new Dictionary<int, TileJson>();
     /// <summary>
-    /// 初始化地块数据
+    /// 初始化
     /// </summary>
-    public static void InitTileModel()
+    public static void Init()
     {
-        int _x = (int)size.x;
-        int _y = (int)size.y;
-        for (int y = 0; y < _y; y++)
-        {
-            for (int x = 0; x < _x; x++)
-            {
-                TileJson tile = new TileJson();
-                int id = x + y * (int)size.x + 1;
-                tile.id = id;
-                tile.type = 1;
-                tile.name = string.Format("[{0},{1}]", tile.coordinate[0], tile.coordinate[1]);
-                tile.heros = null;//--转HerosMgr
-                tile.bgPicUrl = id.ToString();
-                tileMap.Add(tile.id, tile);
-            }
-        }
-        currentTile = tileMap[1];
+        JsonData userInfo = Get("UserInfo");
+        currentTile = AddTileJson(userInfo["tileId"].ToString());
+        FreshData();
     }
     /// <summary>
     /// 切换地块
@@ -53,8 +40,30 @@ public class TileModel : Singleton<TileModel> {
     /// <param name="coordinate"></param>
     public static void SwitchTile(Vector2 coordinate)
     {
-        currentTile = tileMap[GetTileIdByCoordinate(coordinate)];
+        int key = GetTileIdByCoordinate(coordinate);
+        if(tileMap.ContainsKey(key)) currentTile = tileMap[key];
+        else currentTile = AddTileJson(key.ToString()); 
+        FreshData();
         NotiCenter.DispatchEvent(KCEvent.KCTileChange);
+    }
+    /// <summary>
+    /// 刷新数据
+    /// </summary>    
+    static void FreshData()
+    {
+        HerosModel.FreshHeroMap();
+        System.GC.Collect();
+    }
+    /// <summary>
+    /// 添加地块
+    /// </summary>
+    /// <param name="id"></param>    
+    static TileJson AddTileJson(string id)
+    {
+        JsonData tileList = Get("TileList");
+        TileJson tile = JsonMapper.ToObject<TileJson>(tileList[id].ToJson());
+        tileMap.Add(tile.id, tile);
+        return tile;
     }
     /// <summary>
     /// 根据id取得地块信息

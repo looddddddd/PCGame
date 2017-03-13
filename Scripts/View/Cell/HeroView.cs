@@ -6,12 +6,15 @@ public class HeroView : BaseView
     public new Text name;
     public Text hp;
     HeroJson hero;
-    public void InitData(int id)
+    public void InitData(int heroId)
     {
-        hero = HerosModel.GetHeroJsonById(id);
+        hero = HerosModel.GetHeroJsonById(heroId);
         hero.view = this;
+        
+        float x = Random.Range(-150,150);
+        float y = Random.Range(-300,300);
         RectTransform rtf = GetComponent<RectTransform>();
-        rtf.anchoredPosition = new Vector2(100 * hero.id, 100 * hero.id);
+        rtf.anchoredPosition = new Vector2(x, y);
         rtf.localScale = Vector3.one;
         FreshView();
     }
