@@ -1,0 +1,32 @@
+{
+    "1":
+    {
+        "id":1,
+        "orderId":1,
+        "type":1,
+        "name":"道具1",
+        "durable":10,
+        "maxDurable":10,
+        "picUrl":""
+    },
+    "2":
+    {
+        "id":2,
+        "orderId":2,
+        "type":1,
+        "name":"道具2",
+        "durable":10,
+        "maxDurable":10,
+        "picUrl":""
+    },
+    "3":
+    {
+        "id":3,
+        "orderId":3,
+        "type":1,
+        "name":"道具3",
+        "durable":10,
+        "maxDurable":10,
+        "picUrl":""
+    }
+}

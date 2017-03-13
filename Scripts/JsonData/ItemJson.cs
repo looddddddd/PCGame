@@ -11,6 +11,7 @@ public class ItemJson
     public string name;
     public int durable;
     public int maxDurable;
+    public string picUrl;
     public int att;
     public ItemView view;
 }

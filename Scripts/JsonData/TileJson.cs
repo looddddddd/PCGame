@@ -25,6 +25,6 @@ public class TileJson
     public Vector2 coordinate;
     public Vector2[] doors;
     public int[] heros;
-    public string bgPicUrl;
+    public string picUrl;
 
 }
