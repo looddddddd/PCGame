@@ -8,7 +8,7 @@ public class HeroView : BaseView
     HeroJson hero;
     public void InitData(int heroId)
     {
-        hero = HerosModel.GetHeroJsonById(heroId);
+        hero = HerosModel.GetHeroJsonByHeroId(heroId);
         hero.view = this;
         
         float x = Random.Range(-150,150);
@@ -41,6 +41,6 @@ public class HeroView : BaseView
     protected override void OnBtnClick(string btnName)
     {
         base.OnBtnClick(btnName);
-        FightMgr.VSOne(hero);
+        GameMgr.VSOne(hero);
     }
 }

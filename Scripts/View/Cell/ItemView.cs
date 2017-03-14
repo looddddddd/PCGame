@@ -13,7 +13,7 @@ public class ItemView : BaseView
     ItemJson item;
     protected override void OnTogChanged(string togName, bool isChanged)
     {
-        ItemsMgr.currentItem = item;
+        // ItemsMgr.currentItem = item;
     }
     public void InitData(int id)
     {
@@ -24,7 +24,7 @@ public class ItemView : BaseView
     }
     void SetToggle()
     {
-        if (item.id == ItemsMgr.currentItem.id) GetComponent<Toggle>().isOn = true;
+        // if (item.id == ItemsMgr.currentItem.id) GetComponent<Toggle>().isOn = true;
     }
     void FreshView()
     {

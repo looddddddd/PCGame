@@ -6,7 +6,7 @@ public enum KCEvent
     /// <summary>
     /// 道具发生改变
     /// </summary>
-    KCItemChange,
+    KCItemsChange,
     /// <summary>
     /// 地块变化
     /// </summary>

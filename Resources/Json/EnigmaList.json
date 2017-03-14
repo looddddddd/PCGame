@@ -1,0 +1,32 @@
+{
+    "1":
+    {
+        "id":1,
+        "orderId":1,
+        "type":1,
+        "name":"神器1",
+        "level":1,
+        "maxLevel":10,
+        "picUrl":""
+    },
+    "2":
+    {
+        "id":2,
+        "orderId":1,
+        "type":1,
+        "name":"神器2",
+        "level":1,
+        "maxLevel":10,
+        "picUrl":""
+    },
+    "3":
+    {
+        "id":3,
+        "orderId":1,
+        "type":1,
+        "name":"神器3",
+        "level":1,
+        "maxLevel":10,
+        "picUrl":""
+    }
+}

@@ -83,6 +83,9 @@ public class MainView : BaseView
         {
             Fresh();
         });
+        NotiCenter.AddEventListener(KCEvent.KCItemsChange,delegate(object data){
+            ShowAddItemsAni((int[])data);
+        });
     }
 
     protected override void OnStart()
@@ -197,6 +200,16 @@ public class MainView : BaseView
             GameObject doorGo = Pooler.GetPoolObj(name);
             doorGo.transform.SetParent(doorLayer.transform);
             doorGo.GetComponent<DoorView>().InitData(doors[i], i);
+        }
+    }
+    /// <summary>
+    /// 展示添加道具动画
+    /// </summary>    
+    void ShowAddItemsAni(int[] items)
+    {
+        for(int i = 0; i < items.Length; i ++)
+        {
+            Debug.Log(items[i]);
         }
     }
 }

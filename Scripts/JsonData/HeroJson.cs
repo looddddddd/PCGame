@@ -17,6 +17,7 @@ public class HeroJson
     public string name;
     public int hp;
     public int att;
+    public int[] items;
     public HeroView view;
     /// <summary>
     /// 临时的数量id

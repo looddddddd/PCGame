@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// 地块管理器
+/// 谜，不可思议的东西数据
 /// </summary>
-public class TileMgr : Singleton<TileMgr> {
-    
+public class EnigmasModel : Singleton<EnigmasModel> 
+{
+
 }

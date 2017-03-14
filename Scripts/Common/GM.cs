@@ -8,8 +8,6 @@ public class GM : Singleton<GM> {
     {
         Debug.Log("GM,Init");
         TileModel.Init();
-        ItemsModel.InitItemsModel();
-        // HerosModel.InitHerosModel();
     }
     public static void StartGame()
     {
