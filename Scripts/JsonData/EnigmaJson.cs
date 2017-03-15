@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 /// <summary>
-/// 不可思议的东西数据模型
+/// 不可思议的东西数据模型--3个
 /// </summary>
 public class EnigmaJson 
 {
