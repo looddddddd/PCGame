@@ -118,9 +118,9 @@ public class MainView : BaseView
     void PoolerInit()
     {
         Pooler.SetPooler(pooler);
-        Pooler.CreatePool(heroPoolName, heroPrefab);
-        Pooler.CreatePool(doorPoolName, doorPrefab);
-        Pooler.CreatePool(textPoolName, textPrefab);
+        Pooler.CreatePool(PoolType.HeroPool.ToString(), heroPrefab);
+        Pooler.CreatePool(PoolType.DoorPool.ToString(), doorPrefab);
+        Pooler.CreatePool(PoolType.TextPool.ToString(), textPrefab);
     }
     /// <summary>
     /// 刷新

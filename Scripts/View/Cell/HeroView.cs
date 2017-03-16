@@ -36,7 +36,7 @@ public class HeroView : BaseView
 
                 break;
             case FreshType.Die:
-                gameObject.SetActive(false);
+                Pooler.PutPoolObj(PoolType.HeroPool.ToString(), gameObject);
                 break;
         }
     }

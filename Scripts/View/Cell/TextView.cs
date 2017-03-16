@@ -49,7 +49,7 @@ public class TextView : BaseView
     {
         rtf.DOAnchorPos(endPos, 1).OnComplete(delegate() 
         {
-            Pooler.PutPoolObj("TextPool", gameObject);
+            Pooler.PutPoolObj(PoolType.TextPool.ToString(), gameObject);
         });
         //Tweener tweener = image.rectTransform.DOMove(Vector3.zero,1f);
         //设置这个Tween不受Time.scale影响

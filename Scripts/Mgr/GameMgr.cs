@@ -13,7 +13,7 @@ public class GameMgr : Singleton<GameMgr> {
     /// <param name="json">数据类</param>
     public static void VSOne(HeroJson hero)
     {
-        int userAtt = 0;
+        int userAtt = 10;
         hero.hp -= userAtt;
         //刷文本
         hero.view.preHPChangeValue = -userAtt;

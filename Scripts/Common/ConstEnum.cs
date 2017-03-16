@@ -99,3 +99,18 @@ public enum HurtType
     /// </summary>
     Reply,
 }
+public enum PoolType
+{ 
+    /// <summary>
+    /// 英雄池
+    /// </summary>
+    HeroPool,
+    /// <summary>
+    /// 传送池
+    /// </summary>
+    DoorPool,
+    /// <summary>
+    /// 文本池
+    /// </summary>
+    TextPool,
+}
