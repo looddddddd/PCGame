@@ -56,6 +56,10 @@ public class MainView : BaseView
     /// 弹窗层(选择框等)
     /// </summary>
     public GameObject popLayer;
+    /// <summary>
+    /// 触摸层
+    /// </summary>
+    public GameObject touchLayer;
     #endregion
 
     #region 预设引用
@@ -74,6 +78,14 @@ public class MainView : BaseView
     /// 地图名字
     /// </summary>
     public GameObject tileNameGo;
+    /// <summary>
+    /// 触摸对象
+    /// </summary>
+    public GameObject touchPoint;
+    /// <summary>
+    /// 触摸点动画控制器
+    /// </summary>
+    public Animator touchController;
     #endregion
 
     protected override void AddEventListener()
@@ -93,6 +105,15 @@ public class MainView : BaseView
         base.OnStart();
         Pooler.SetPooler(pooler);
         Fresh();
+    }
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (Input.GetMouseButton(0) && touchLayer.activeSelf) //监听鼠标按下
+        {
+            touchPoint.SetActive(true);
+            touchController.Play("Aperture_1");
+        }
     }
     /// <summary>
     /// 刷新

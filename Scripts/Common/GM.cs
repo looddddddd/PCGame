@@ -13,9 +13,4 @@ public class GM : Singleton<GM> {
     {
         SceneManager.LoadScene("Main");
     }
-
-    public static void TestGit()
-    {
-        //测试vsCode 推送
-    }
 }
