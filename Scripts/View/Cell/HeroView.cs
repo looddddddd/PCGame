@@ -6,6 +6,8 @@ public class HeroView : BaseView
     public new Text name;
     public Text hp;
     HeroJson hero;
+    public int preHPChangeValue = 0;
+
     public void InitData(int heroId)
     {
         hero = HerosModel.GetHeroJsonByHeroId(heroId);

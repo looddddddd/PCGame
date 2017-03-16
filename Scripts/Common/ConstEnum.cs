@@ -11,6 +11,10 @@ public enum KCEvent
     /// 地块变化
     /// </summary>
     KCTileChange,
+    /// <summary>
+    /// 英雄生命变化
+    /// </summary>
+    KCHeroHPChange,
 }
 public enum HeroType 
 {
@@ -79,4 +83,19 @@ public enum DoorType
     /// 用户定义终点
     /// </summary>
     UserEnd,
+}
+public enum HurtType
+{ 
+    /// <summary>
+    /// 伤害
+    /// </summary>
+    Hurt,
+    /// <summary>
+    /// 闪避
+    /// </summary>
+    Miss,
+    /// <summary>
+    /// 回复
+    /// </summary>
+    Reply,
 }

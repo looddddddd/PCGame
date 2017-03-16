@@ -56,10 +56,6 @@ public class MainView : BaseView
     /// 弹窗层(选择框等)
     /// </summary>
     public GameObject popLayer;
-    /// <summary>
-    /// 触摸层
-    /// </summary>
-    public GameObject touchLayer;
     #endregion
 
     #region 预设引用
@@ -71,6 +67,14 @@ public class MainView : BaseView
     /// 传送预设
     /// </summary>
     public GameObject doorPrefab;
+    /// <summary>
+    /// 文本展示
+    /// </summary>
+    public GameObject textPrefab;
+
+    string heroPoolName = "HeroPool";
+    string doorPoolName = "DoorPool";
+    string textPoolName = "TextPool";
     #endregion
 
     #region 地图设置
@@ -78,14 +82,6 @@ public class MainView : BaseView
     /// 地图名字
     /// </summary>
     public GameObject tileNameGo;
-    /// <summary>
-    /// 触摸对象
-    /// </summary>
-    public GameObject touchPoint;
-    /// <summary>
-    /// 触摸点动画控制器
-    /// </summary>
-    public Animator touchController;
     #endregion
 
     protected override void AddEventListener()
@@ -95,25 +91,36 @@ public class MainView : BaseView
         {
             Fresh();
         });
-        NotiCenter.AddEventListener(KCEvent.KCItemsChange,delegate(object data){
+        NotiCenter.AddEventListener(KCEvent.KCItemsChange,delegate(object data)
+        {
             ShowAddItemsAni((int[])data);
         });
+        NotiCenter.AddEventListener(KCEvent.KCHeroHPChange, delegate(object data)
+        {
+            FreshText(data);
+        });
     }
-
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        GM.Init();
+    }
     protected override void OnStart()
     {
         base.OnStart();
-        Pooler.SetPooler(pooler);
+        PoolerInit();
         Fresh();
     }
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        if (Input.GetMouseButton(0) && touchLayer.activeSelf) //监听鼠标按下
-        {
-            touchPoint.SetActive(true);
-            touchController.Play("Aperture_1");
-        }
+    }
+    void PoolerInit()
+    {
+        Pooler.SetPooler(pooler);
+        Pooler.CreatePool(heroPoolName, heroPrefab);
+        Pooler.CreatePool(doorPoolName, doorPrefab);
+        Pooler.CreatePool(textPoolName, textPrefab);
     }
     /// <summary>
     /// 刷新
@@ -135,44 +142,19 @@ public class MainView : BaseView
     /// 刷新英雄
     /// </summary>
     void FreshHeros()
-    { 
-        string name = "HeroPool";
-        if (Pooler.PoolsContainsKey(name)) ReUseHeros();
-        else GreateHeros();
-    }
-    /// <summary>
-    /// 创建对象池,创建英雄卡牌
-    /// </summary>
-    void GreateHeros()
     {
-        string name = "HeroPool";
-        Dictionary<int,HeroJson> heroMap = HerosModel.GetHeroMap();
-        Pooler.CreatePool(name, heroPrefab, heroMap.Count);
-        foreach(var pair in heroMap)
-        {
-            GameObject heroGo = Pooler.GetPoolObj(name);
-            heroGo.transform.SetParent(heroLayer.transform);
-            heroGo.GetComponent<HeroView>().InitData(pair.Value.heroId);
-        }
-    }
-    /// <summary>
-    /// 重复使用英雄
-    /// </summary>
-    void ReUseHeros()
-    {
-        string name = "HeroPool";
         //回收
         int count = heroLayer.transform.childCount;
         for (int i = 0; i < count; i++)
         {
             GameObject childGo = heroLayer.transform.GetChild(0).gameObject;
-            Pooler.PutPoolObj(name,childGo);
+            Pooler.PutPoolObj(heroPoolName, childGo);
         }
         //再利用
         Dictionary<int, HeroJson> heroMap = HerosModel.GetHeroMap();
         foreach (var pair in heroMap)
         {
-            GameObject heroGo = Pooler.GetPoolObj(name);
+            GameObject heroGo = Pooler.GetPoolObj(heroPoolName);
             heroGo.transform.SetParent(heroLayer.transform);
             heroGo.GetComponent<HeroView>().InitData(pair.Value.heroId);
         }
@@ -182,53 +164,37 @@ public class MainView : BaseView
     /// </summary>
     void FreshDoors()
     {
-        string name = "DoorPool";
-        if (Pooler.PoolsContainsKey(name)) ReUseDoors();
-        else GreateDoor();
-    }
-    /// <summary>
-    /// 创建对象池,创建传送点
-    /// </summary>
-    void GreateDoor()
-    {
-        string name = "DoorPool";
-        Vector2[] doors = TileModel.currentTile.doors;
-        Pooler.CreatePool(name, doorPrefab, doors.Length);
-        for (int i = 0; i < doors.Length; i++) 
-        {
-            GameObject doorGo = Pooler.GetPoolObj(name);
-            doorGo.transform.SetParent(doorLayer.transform);
-            doorGo.GetComponent<DoorView>().InitData(doors[i],i);
-        }
-    }
-    /// <summary>
-    /// 重复使用传送点
-    /// </summary>
-    void ReUseDoors()
-    {
-        string name = "DoorPool";
         //回收
         int count = doorLayer.transform.childCount;
         for (int i = 0; i < count; i++)
         {
             GameObject childGo = doorLayer.transform.GetChild(0).gameObject;
-            Pooler.PutPoolObj(name, childGo);
+            Pooler.PutPoolObj(doorPoolName, childGo);
         }
         //再利用
         Vector2[] doors = TileModel.currentTile.doors;
         for (int i = 0; i < doors.Length; i++)
         {
-            GameObject doorGo = Pooler.GetPoolObj(name);
+            GameObject doorGo = Pooler.GetPoolObj(doorPoolName);
             doorGo.transform.SetParent(doorLayer.transform);
             doorGo.GetComponent<DoorView>().InitData(doors[i], i);
         }
+    }
+    /// <summary>
+    /// 刷新文本展示
+    /// </summary>
+    void FreshText(object data)
+    {
+        GameObject textGo = Pooler.GetPoolObj(textPoolName);
+        textGo.transform.SetParent(numericalLayer.transform);
+        textGo.GetComponent<TextView>().Fresh(data);
     }
     /// <summary>
     /// 展示添加道具动画
     /// </summary>    
     void ShowAddItemsAni(int[] items)
     {
-        for(int i = 0; i < items.Length; i ++)
+        for (int i = 0; i < items.Length; i++)
         {
             Debug.Log(items[i]);
         }

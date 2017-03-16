@@ -15,7 +15,7 @@ public class TileModel : BaseModel {
         get { return _currentTile; }
         set { _currentTile = value; }
     }
-
+    static bool isInit;
     const float _size = 3f;
     /// <summary>
     /// 地图尺寸
@@ -30,6 +30,8 @@ public class TileModel : BaseModel {
     /// </summary>
     public static void Init()
     {
+        if (isInit) return;
+        isInit = true;
         JsonData userInfo = Get("UserInfo");
         currentTile = AddTileJson(userInfo["tileId"].ToString());
         FreshData();
