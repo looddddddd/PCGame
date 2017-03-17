@@ -5,7 +5,9 @@ public class HeroView : BaseView
 {
     public new Text name;
     public Text hp;
+    public Text att;
     HeroJson hero;
+    [HideInInspector]
     public int preHPChangeValue = 0;
 
     public void InitData(int heroId)
@@ -24,6 +26,7 @@ public class HeroView : BaseView
     {
         name.text = hero.name;
         hp.text = hero.hp.ToString();
+        att.text = hero.att.ToString();
     }
     public void Fresh(FreshType type)
     {

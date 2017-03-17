@@ -49,6 +49,10 @@ public class MainView : BaseView
     /// </summary>
     public GameObject passEventLayer;
     /// <summary>
+    /// 触摸层
+    /// </summary>
+    public GameObject touchLayer;
+    /// <summary>
     /// 事件层(剧情,对话等)
     /// </summary>
     public GameObject eventLayer;
@@ -71,10 +75,6 @@ public class MainView : BaseView
     /// 文本展示
     /// </summary>
     public GameObject textPrefab;
-
-    string heroPoolName = "HeroPool";
-    string doorPoolName = "DoorPool";
-    string textPoolName = "TextPool";
     #endregion
 
     #region 地图设置
@@ -82,6 +82,10 @@ public class MainView : BaseView
     /// 地图名字
     /// </summary>
     public GameObject tileNameGo;
+    /// <summary>
+    /// 触摸展示对象
+    /// </summary>
+    public RectTransform touchRtf;
     #endregion
 
     protected override void AddEventListener()
@@ -114,7 +118,17 @@ public class MainView : BaseView
     protected override void OnUpdate()
     {
         base.OnUpdate();
+        if (Input.GetMouseButton(0))
+        {
+            touchRtf.gameObject.SetActive(true);
+            touchRtf.anchoredPosition = Input.mousePosition;
+            return;
+        }
+        touchRtf.gameObject.SetActive(false);
     }
+    /// <summary>
+    /// 初始化对象池
+    /// </summary>
     void PoolerInit()
     {
         Pooler.SetPooler(pooler);
@@ -148,15 +162,16 @@ public class MainView : BaseView
         for (int i = 0; i < count; i++)
         {
             GameObject childGo = heroLayer.transform.GetChild(0).gameObject;
-            Pooler.PutPoolObj(heroPoolName, childGo);
+            Pooler.PutPoolObj(PoolType.HeroPool.ToString(), childGo);
         }
         //再利用
         Dictionary<int, HeroJson> heroMap = HerosModel.GetHeroMap();
         foreach (var pair in heroMap)
         {
-            GameObject heroGo = Pooler.GetPoolObj(heroPoolName);
+            GameObject heroGo = Pooler.GetPoolObj(PoolType.HeroPool.ToString());
             heroGo.transform.SetParent(heroLayer.transform);
             heroGo.GetComponent<HeroView>().InitData(pair.Value.heroId);
+            heroGo.name = pair.Value.heroId.ToString();
         }
     }
     /// <summary>
@@ -169,13 +184,13 @@ public class MainView : BaseView
         for (int i = 0; i < count; i++)
         {
             GameObject childGo = doorLayer.transform.GetChild(0).gameObject;
-            Pooler.PutPoolObj(doorPoolName, childGo);
+            Pooler.PutPoolObj(PoolType.DoorPool.ToString(), childGo);
         }
         //再利用
         Vector2[] doors = TileModel.currentTile.doors;
         for (int i = 0; i < doors.Length; i++)
         {
-            GameObject doorGo = Pooler.GetPoolObj(doorPoolName);
+            GameObject doorGo = Pooler.GetPoolObj(PoolType.DoorPool.ToString());
             doorGo.transform.SetParent(doorLayer.transform);
             doorGo.GetComponent<DoorView>().InitData(doors[i], i);
         }
@@ -185,7 +200,7 @@ public class MainView : BaseView
     /// </summary>
     void FreshText(object data)
     {
-        GameObject textGo = Pooler.GetPoolObj(textPoolName);
+        GameObject textGo = Pooler.GetPoolObj(PoolType.TextPool.ToString());
         textGo.transform.SetParent(numericalLayer.transform);
         textGo.GetComponent<TextView>().Fresh(data);
     }
