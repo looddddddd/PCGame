@@ -51,8 +51,16 @@ public class TouchView : BaseView
         foreach (var pair in curAttList)
         {
             SetLock(pair.Value, false);
+            AttHero(pair.Value);
         }
         curAttList.Clear();
+    }
+    /// <summary>
+    /// 攻击英雄
+    /// </summary>
+    void AttHero(GameObject heroGo)
+    {
+        heroGo.GetComponent<HeroView>().Attacked();
     }
     /// <summary>
     /// 设置对象锁定
@@ -100,6 +108,7 @@ public class TouchView : BaseView
             RemoveAttHeroView(other.gameObject);
         }
     }
+
     void OnDisable()
     {
         RemoveAllAttHeroView();

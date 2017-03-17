@@ -88,6 +88,8 @@ public class MainView : BaseView
     public RectTransform touchRtf;
     #endregion
 
+    bool isObserveModel = false;
+
     protected override void AddEventListener()
     {
         base.AddEventListener();
@@ -213,5 +215,21 @@ public class MainView : BaseView
         {
             Debug.Log(items[i]);
         }
+    }
+    /// <summary>
+    /// 观察模式
+    /// </summary>
+    void ObserveModel()
+    {
+        passEventLayer.SetActive(true);
+        touchLayer.SetActive(false);
+    }
+    /// <summary>
+    /// 攻击模式
+    /// </summary>
+    void AttModel()
+    {
+        passEventLayer.SetActive(false);
+        touchLayer.SetActive(true);        
     }
 }

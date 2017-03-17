@@ -43,9 +43,13 @@ public class HeroView : BaseView
                 break;
         }
     }
+    public void Attacked()
+    {
+        GameMgr.VSOne(hero);
+    }
     protected override void OnBtnClick(string btnName)
     {
         base.OnBtnClick(btnName);
-        GameMgr.VSOne(hero);
+        //查看英雄面板
     }
 }
