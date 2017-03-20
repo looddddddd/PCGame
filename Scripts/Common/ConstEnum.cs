@@ -114,3 +114,22 @@ public enum PoolType
     /// </summary>
     TextPool,
 }
+public enum DataType 
+{
+    /// <summary>
+    /// 用户数据表
+    /// </summary>
+    UserInfo,
+    /// <summary>
+    /// 地块数据表
+    /// </summary>
+    TileList,
+    /// <summary>
+    /// 英雄数据表
+    /// </summary>
+    HeroList,
+    /// <summary>
+    /// 道具数据表
+    /// </summary>
+    ItemList,
+}

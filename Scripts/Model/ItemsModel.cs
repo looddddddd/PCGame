@@ -56,7 +56,7 @@ public  class ItemsModel : BaseModel
     /// </summary>
     static ItemJson AddItemJson(string id)
     {
-        JsonData itemList = Get("ItemList");
+        JsonData itemList = Get(DataType.ItemList);
         ItemJson item = JsonMapper.ToObject<ItemJson>(itemList[id].ToJson());
         itemMap.Add(item.id,item);
         return item;

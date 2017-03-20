@@ -31,7 +31,7 @@ public class HerosModel : BaseModel {
     /// </summary>
     static void AddUserHeroJson(string id)
     {
-        JsonData heroList = Get("HeroList");
+        JsonData heroList = Get(DataType.HeroList);
         HeroJson hero = JsonMapper.ToObject<HeroJson>(heroList[id].ToJson());
         hero.heroId = userHeroMap.Count;
         userHeroMap.Add(userHeroMap.Count,hero);
@@ -58,7 +58,7 @@ public class HerosModel : BaseModel {
     /// </summary>          
     static void AddHeroMap(string id)
     {
-        JsonData heroList = Get("HeroList");
+        JsonData heroList = Get(DataType.HeroList);
         HeroJson hero = JsonMapper.ToObject<HeroJson>(heroList[id].ToJson());
         heroMap.Add(hero.id,hero);
     }

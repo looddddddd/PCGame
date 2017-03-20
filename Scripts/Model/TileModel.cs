@@ -32,8 +32,8 @@ public class TileModel : BaseModel {
     {
         if (isInit) return;
         isInit = true;
-        JsonData userInfo = Get("UserInfo");
-        currentTile = AddTileJson(userInfo["tileId"].ToString());
+        JsonData userInfo = Get(DataType.UserInfo);
+        currentTile = AddTileJson(int.Parse(userInfo["tileId"].ToString()));
         FreshData();
     }
     /// <summary>
@@ -44,7 +44,7 @@ public class TileModel : BaseModel {
     {
         int key = GetTileIdByCoordinate(coordinate);
         if(tileMap.ContainsKey(key)) currentTile = tileMap[key];
-        else currentTile = AddTileJson(key.ToString()); 
+        else currentTile = AddTileJson(key); 
         FreshData();
         NotiCenter.DispatchEvent(KCEvent.KCTileChange);
     }
@@ -60,12 +60,36 @@ public class TileModel : BaseModel {
     /// 添加地块
     /// </summary>
     /// <param name="id"></param>    
-    static TileJson AddTileJson(string id)
+    static TileJson AddTileJson(int id)
     {
-        JsonData tileList = Get("TileList");
-        TileJson tile = JsonMapper.ToObject<TileJson>(tileList[id].ToJson());
+        JsonData tileJson = GetData(id, DataType.TileList);
+        if (tileJson == null) tileJson = WriterTileJson(id);
+        TileJson tile = JsonMapper.ToObject<TileJson>(tileJson.ToJson());
         tileMap.Add(tile.id, tile);
         return tile;
+    }
+    /// <summary>
+    /// 写入新的数据
+    /// </summary>
+    /// <param name="id"></param>
+    static JsonData WriterTileJson(int id)
+    {
+        JsonWriter writer = new JsonWriter();
+        writer.WriteObjectStart();
+        writer.WritePropertyName(id.ToString());
+
+        writer.WriteObjectStart();
+        writer.WritePropertyName("id");
+        writer.Write(id);
+        writer.WriteObjectEnd();
+
+        writer.WriteObjectEnd();
+
+        string data = writer.ToString();
+
+        SaveData(data,id,DataType.TileList);
+
+        return JsonMapper.ToObject(data);
     }
     /// <summary>
     /// 根据id取得地块信息
