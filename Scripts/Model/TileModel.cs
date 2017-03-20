@@ -16,7 +16,7 @@ public class TileModel : BaseModel {
         set { _currentTile = value; }
     }
     static bool isInit;
-    const float _size = 3f;
+    const float _size = 100f;
     /// <summary>
     /// 地图尺寸
     /// </summary>
@@ -76,12 +76,9 @@ public class TileModel : BaseModel {
     {
         JsonWriter writer = new JsonWriter();
         writer.WriteObjectStart();
-        writer.WritePropertyName(id.ToString());
 
-        writer.WriteObjectStart();
         writer.WritePropertyName("id");
         writer.Write(id);
-        writer.WriteObjectEnd();
 
         writer.WriteObjectEnd();
 

@@ -51,5 +51,6 @@ public class HeroView : BaseView
     {
         base.OnBtnClick(btnName);
         //查看英雄面板
+
     }
 }

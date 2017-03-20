@@ -8,6 +8,6 @@ public class LoadingView : BaseView {
     {
         base.OnAwake();
         GM.Init();
-        StartCoroutine(Utils.DelayDo(GM.StartGame, 1f));
+        StartCoroutine(Utils.DelayDo(GM.StartGame, 0.5f));
     }
 }

@@ -60,6 +60,10 @@ public class MainView : BaseView
     /// 弹窗层(选择框等)
     /// </summary>
     public GameObject popLayer;
+    /// <summary>
+    /// 遮罩层(切换地图时展示)
+    /// </summary>
+    public GameObject maskLayer;
     #endregion
 
     #region 预设引用
@@ -110,6 +114,7 @@ public class MainView : BaseView
     {
         base.OnAwake();
         GM.Init();
+        maskLayer.SetActive(true);
     }
     protected override void OnStart()
     {
