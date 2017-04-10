@@ -24,7 +24,7 @@ public class TileJson
     public string name;
     public Vector2 coordinate;
     public Vector2[] doors;
-    public int[] heros = new int[] {1};
+    public int[] heros = new int[] {1,2};//展示地图上的英雄id
     public string picUrl;
 
 }

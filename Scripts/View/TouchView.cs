@@ -102,6 +102,9 @@ public class TouchView : BaseView
     /// <param name="other">离开的对象</param>
     void OnTriggerExit2D(Collider2D other)
     {
+        if (!gameObject.activeSelf) return;
+        //Debug.Log("OnTriggerExit2D");
+        //Debug.Log(gameObject.activeSelf);
         if (other.tag == "Hero")
         {
             SetLock(other.gameObject, false);
@@ -111,6 +114,7 @@ public class TouchView : BaseView
 
     void OnDisable()
     {
+        //Debug.Log("OnDisable");
         RemoveAllAttHeroView();
     }
 }
