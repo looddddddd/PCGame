@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 /// <summary>
-/// 所有数据模型基类
+/// 所有数据模型基类--
 /// </summary>
 public class BaseModel:Singleton<BaseModel>
 {
