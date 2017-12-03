@@ -8,7 +8,7 @@ using LitJson;
 public class BaseModel:Singleton<BaseModel>
 {
     /// <summary>
-    /// 渠道id  test
+    /// 渠道id  test test2
     /// </summary>
     protected static int channelId = 1001;
     /// <summary>
